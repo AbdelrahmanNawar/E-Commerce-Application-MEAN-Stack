@@ -1,0 +1,157 @@
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div id="first">
+                    <div class="myform form ">
+                        <div class="logo mb-3">
+                            <div class="col-md-12 text-center">
+                                <h1>Registration</h1>
+                            </div>
+                        </div>
+                        <!-- class="form-horizontal" -->
+                        <form method="post" action="" (ngSubmit)="RegisterNewUser()">
+                            <div class="form-group">
+                                <label for="name" class="cols-sm-2 control-label">Name</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <i class="fa fa-user fa m-2" aria-hidden="true"></i>
+                                        <input type="text" class="form-control" name="name" id="name" placeholder="Your Name" [(ngModel)]="newRegisterUser.username">
+                                    </div>
+                                    <div id="validation" *ngIf="newRegisterUser.username.length < 6">
+                                        Name must be greater than 6
+                                    </div>
+                                    <div id="validation" *ngIf="newRegisterUser.username.length >= 16">
+                                        Name must be less than 16
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email" class="cols-sm-2 control-label">Email</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <i class="fa fa-envelope fa m-2" aria-hidden="true"></i>
+                                        <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" [(ngModel)]="newRegisterUser.email" />
+                                    </div>
+                                    <div id="validation" *ngIf="newRegisterUser.email.length < 7">
+                                        Please Enter Valid Email
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="mobile" class="cols-sm-2 control-label required">Password</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <i class="fa fa-mobile m-2" aria-hidden="true"></i>
+                                        <input type="password" class="form-control" name="mobile" id="mobile" placeholder="Your Password" [(ngModel)]="newRegisterUser.password" />
+                                    </div>
+                                    <div id="validation" *ngIf="newRegisterUser.password.length < 5">
+                                        password must be at least 5 characters...
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="nationality" class="cols-sm-2 control-label">Gender</label>
+                                <div class="cols-sm-10">
+                                    <div class="input-group">
+                                        <i class="fa fa-globe fa-lg m-2" aria-hidden="true"></i>
+                                        <select class="form-control" name="nationality" id="nationality" placeholder="Please select your Nationality" [(ngModel)]="newRegisterUser.gender">
+                                            <option value="male">Male</option>
+                                            <option value="female">Female</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-danger group m-3">
+                                {{isExitedUser}}
+                            </div>
+                            <div class="form-">
+                                <button type="submit" class="btn btn-primary btn-lg btn-block login-button" (click)="RegisterNewUser()">Register</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#signup").click(function() {
+            $("#first").fadeOut("fast", function() {
+                $("#second").fadeIn("fast");
+            });
+        });
+
+        $("#signin").click(function() {
+            $("#second").fadeOut("fast", function() {
+                $("#first").fadeIn("fast");
+            });
+        });
+
+
+
+        $(function() {
+            $("form[name='login']").validate({
+                rules: {
+
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+
+                    }
+                },
+                messages: {
+                    email: "Please enter a valid email address",
+
+                    password: {
+                        required: "Please enter password",
+
+                    }
+
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+
+
+
+        $(function() {
+
+            $("form[name='registration']").validate({
+                rules: {
+                    firstname: "required",
+                    lastname: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+
+                messages: {
+                    firstname: "Please enter your firstname",
+                    lastname: "Please enter your lastname",
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    email: "Please enter a valid email address"
+                },
+
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</body>

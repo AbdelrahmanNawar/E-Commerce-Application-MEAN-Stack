@@ -1,0 +1,62 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <p>Home / Category / Delete Product</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<div class="container">
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        Are you sure you wanna delete this product?
+                    </h4>
+                    <a type="button" class="close" href="/products">
+                        &times;
+                    </a>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="single_category_product">
+                        <div class="single_category_img text-center">
+                            <img style="width: 400px; height: 400;" [src]="product.imageUrl" *ngIf="product.imageUrl">
+                            <img style="width: 400px; height: 400;" src="assets/products/default-product-image.png" *ngIf="!product.imageUrl">
+                            <!-- <img [src]="product.image" style="height: 30%; width: 85%;" /> -->
+                            <div class="category_product_text">
+                                <h5>{{ product.title }}</h5>
+                                <h6>{{ product.details }}</h6>
+                                <del *ngIf="product.promotion">${{ product.price }}</del>
+                                <p>${{ getPrice() }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-success text-light" (click)="deleteProduct()" href="/products">
+                        Delete
+                    </a>
+                    <a type="button" class="btn btn-danger" href="/products">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

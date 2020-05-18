@@ -1,0 +1,118 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <p>Home / Category / Edit Product </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!-- add Item -->
+<div class="container m-5 p-5">
+    <form class="add-product" action="">
+        <div class="add-product__images slider">
+            <div class="add-product__image-actions">
+                <div class="add-product__image-action">
+                    <a (click)="uploadFile(inputFile.value)"><i class="fas fa-plus-square"></i></a>
+                    <a (click)="removeImg()"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+            <div class="slider__items">
+                <!-- <div class="slider__item active" style="background-image: url({{newProductObj.image}})"></div> -->
+                <div class="preview text-center">
+                    <img style="width: 400px; height: 400;" [src]="imgPreview" *ngIf="imgPreview">
+                    <img style="width: 400px; height: 400;" [src]="product.imageUrl" *ngIf="!imgPreview">
+                    <div class="form-group text-center m-3">
+                        <span>
+                            <input #inputFile type="file" id="file" (change)="uploadFile($event)">
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="add-product__images slider">
+            <div class="add-product__image-actions">
+                <div class="add-product__image-action">
+                    <a><i class="fas fa-plus-square"></i></a>
+                    <a><i class="fas fa-edit"></i></a>
+                    <a><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+            <div class="slider__items">
+                <img style="width: 400px; height: 400;" [src]="product.image" *ngIf="product.image">
+                <img style="width: 400px; height: 400;" class="slider__item active" src="assets/products/default-product-image.png" *ngIf="!product.image">
+            </div>
+        </div> -->
+        <div class="add-product__data">
+            <div class="form-controls">
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input class="form-control" type="text" name="title" [(ngModel)]="product.title" />
+                </div>
+                <div class="form-group alert alert-danger col-12" *ngIf="product.title.length == 0">
+                    Name is required..
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <textarea class="form-control" name="details" [(ngModel)]="product.details" cols="30" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Price</label>
+                    <input class="form-control" type="text" name="price" [(ngModel)]="product.price" id="" />
+                </div>
+                <div class="form-group alert alert-danger col-12" *ngIf="product.price == 0">
+                    Price is required..
+                </div>
+                <div class="add-product__discount">
+                    <div class="form-group">
+                        <label for="">Satus</label>
+                        <div class="form-group__radios">
+                            <div class="form-group__radio">
+                                <input type="radio" name="sale" value="true" #onSale [(ngModel)]="product.isPromoted" />
+                                <span>On Sale</span>
+                            </div>
+                            <div class="form-group__radio">
+                                <input type="radio" name="sale" value="false" #notOnSale [(ngModel)]="product.isPromoted" />
+                                <span>Not On Sale</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Promotion</label>
+                        <input class="form-control" type="text" name="promotion" [(ngModel)]="product.promotion" [disabled]="disabledFlag" />
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="validationMsg!==''">
+                    {{validationMsg}}
+                </div>
+                <div class="form-group">
+                    <label for="">Quantity</label>
+                    <input class="form-control" type="number" name="quantity" [(ngModel)]="product.quantity">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" name="category" #categorySelected (change)="selectCategory(categorySelected.value)">
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="children">Children</option>
+                     </select>
+                </div>
+                <div class="form-group alert alert-danger col-12" *ngIf="product.category == null">
+                    Category is required..
+                </div>
+                <div class="add-product__actions">
+                    <button class="btn btn--gray" routerLink="/products">Cancel</button>
+                    <a class="btn btn--primary" type="button" (click)="submitEditedProduct()">Submit</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

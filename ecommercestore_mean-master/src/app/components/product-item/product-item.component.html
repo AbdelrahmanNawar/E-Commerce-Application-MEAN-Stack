@@ -1,0 +1,33 @@
+<div class="item-medium-1__alert" *ngIf="product.promotion && product.quantity > 0">Sale</div>
+<div class="item-medium-1__alert text-center" *ngIf="product.quantity == 0">Out Of Stock</div>
+<div class="single_category_product">
+    <div class="">
+        <a routerLink="/productDetails/{{ product._id }}">
+            <img [src]="product.imageUrl" class="col-lg-12" />
+            <!-- <img src="{{product.imageUrl}}" *ngIf="product.image === null" class="col-lg-12" /> -->
+        </a>
+        <div class="category_social_icon" *ngIf="product.quantity > 0">
+            <ul>
+                <li>
+                    <a (click)="prdService.addToShoppingCart(product)"><i class="ti-bag"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="category_product_text">
+            <a routerLink="/productDetails/{{ product._id }}">
+                <h5>{{ product.title }}</h5>
+            </a>
+            <del *ngIf="product.promotion">${{ product.price }}</del>
+            <br *ngIf="!product.promotion">
+            <p>${{ getPrice() }}</p>
+        </div>
+        <span class="text-center" *ngIf="currentUserRole === 'admin'">
+            <a class="btn_3 btn-secondary m-1" routerLink="/product/edit/{{ product._id }}">
+                <i class="fa fa-edit"></i>
+            </a>
+            <button type="button" class="btn_3 btn-danger text-light m-1" data-toggle="modal" data-target="#myModal" routerLink="/product/delete/{{ product._id }}">
+                <i class="fa fa-trash-alt"></i>
+            </button>
+        </span>
+    </div>
+</div>

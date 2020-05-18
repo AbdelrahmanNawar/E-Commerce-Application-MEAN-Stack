@@ -1,0 +1,87 @@
+<body class="bg-white">
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p>Home / Category / Product Details</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Single Product Area =================-->
+    <div class="product_image_area section_padding">
+        <div class="container">
+            <div class="row s_product_inner">
+                <div class="col-lg-5">
+                    <div class="product_slider_img">
+                        <div id="vertical">
+                            <div data-thumb="img/product_details/prodect_details_1.png" class="text-center">
+                                <div class="item-medium-1__alert" *ngIf="product.promotion && product.quantity > 0">Sale</div>
+                                <div class="item-medium-1__alert text-center" *ngIf="product.quantity == 0">Out Of Stock</div>
+                                <img [src]="product.imageUrl" style="width: 300px; height: 400px;" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 offset-lg-1">
+                    <div class="s_product_text">
+                        <h3>{{ product.title }}</h3>
+                        <del *ngIf="product.promotion">${{ product.price }}</del>
+                        <h2>${{ getPrice() }}</h2>
+                        <span>
+                            <ul class="list">
+                                <li>
+                                    <a class="active">
+                                        <span>Category</span> : {{ product.category }}
+                        </a>
+                        </li>
+                        <li *ngIf="product.quantity > 0">
+                            <a> <span>Availibility</span> : In Stock</a>
+                        </li>
+                        <li *ngIf="product.quantity == 0">
+                            <a> <span>Availibility</span> : Out Of Stock</a>
+                        </li>
+                        <li>
+                            <a>
+                                <span> Description </span> : {{ product.details }}
+                            </a>
+                        </li>
+                        <li>
+                            <a>
+                                <span> Quantity </span> : {{ product.quantity }}
+                            </a>
+                        </li>
+                        </ul>
+                        </span>
+                        <span class="text-center" *ngIf="userService.getCurrentUser().role === 'admin'">
+                            <a class="btn_3 btn btn-secondary m-1" routerLink="/product/edit/{{ product._id }}">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn_3 btn-danger text-light m-1" data-toggle="modal" data-target="#myModal" routerLink="/product/delete/{{ product._id }}">
+                                <i class="fa fa-trash-alt"></i>
+                            </button>
+                        </span>
+
+                        <div class="card_area" *ngIf="product.quantity>0">
+                            <div class="add_to_cart">
+                                <div class="text-center">
+                                    <a class="btn_3 text-light" style="cursor: pointer;;" (click)="prdService.addToShoppingCart(product)">Add to cart</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--================End Single Product Area =================-->
+</body>

@@ -1,0 +1,112 @@
+<header class="main_menu home_menu">
+    <div class="container-fluid">
+        <div class="row align-items-center justify-content-center">
+            <div class="col-lg-11">
+                <nav class="navbar navbar-expand-lg navbar-light">
+                    <a class="navbar-brand" routerLink="/home">
+                        <img src="assets/img/logo.png" alt="logo" />
+                    </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                    </button>
+                    <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                        <ul class="navbar-nav p-4">
+                            <li class="nav-item">
+                                <a class="" routerLink="/home">
+                                    <span tooltip="Home" placement="bottom" show-delay="500">
+                                      <i class="fa fa-home"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="userService.isLoggedIn()">
+                                <a class="" routerLink="/profile/{{ getCurrentUserId() }}">
+                                    <span tooltip="Profile" placement="bottom" show-delay="500">
+                                      <i class="fa fa-user"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="userService.isLoggedIn()">
+                                <a class="" routerLink="/products">
+                                    <span tooltip="Products" placement="bottom" show-delay="500">
+                                      <i class="fa fa-tshirt"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="
+                              userService.isLoggedIn() &&
+                              userService.getCurrentUser().role == 'admin'
+                            ">
+                                <a class="" routerLink="/orders">
+                                    <span tooltip="Orders" placement="bottom" show-delay="500">
+                                      <i class="fa fa-money-bill-wave"></i>
+                                    </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="
+                              userService.isLoggedIn() &&
+                              userService.getCurrentUser().role == 'admin'
+                            ">
+                                <a class="" routerLink="/users">
+                                    <span tooltip="Users" placement="bottom" show-delay="500">
+                    <i class="fa fa-user-friends"></i>
+                  </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" routerLink="/contact" *ngIf="
+                    (userService.isLoggedIn() &&
+                      userService.getCurrentUser().role == 'member') ||
+                    !userService.isLoggedIn()
+                  ">
+                                    <span tooltip="Contact" placement="bottom" show-delay="500">
+                    <i class="fa fa-address-book"></i>
+                  </span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="" routerLink="/about" *ngIf="
+                    (userService.isLoggedIn() &&
+                      userService.getCurrentUser().role == 'member') ||
+                    !userService.isLoggedIn()
+                  ">
+                                    <span tooltip="About" placement="bottom" show-delay="500">
+                    <i class="fa fa-info"></i>
+                  </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="userService.isLoggedIn()">
+                                <a class="" routerLink="/home" (click)="userService.LogOut()">
+                                    <span tooltip="Logout" placement="bottom" show-delay="500">
+                    <i class="fa fa-sign-out-alt"></i>
+                  </span>
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="!userService.isLoggedIn()">
+                                <a routerLink="/login">
+                                    <i class="fa fa-sign-in-alt"></i> login
+                                </a>
+                            </li>
+                            <li class="nav-item" *ngIf="!userService.isLoggedIn()">
+                                <a routerLink="/register">
+                                    <i class="fa fa-address-card"></i> Register
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="hearer_icon d-flex p-2" *ngIf="userService.isLoggedIn()">
+                        <div class="dropdown cart">
+                            <a class="dropdown-toggle" id="navbarDropdown3" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span tooltip="Shopping Cart" placement="bottom" show-delay="500">
+                  <app-shopping-cart></app-shopping-cart>
+                </span>
+                            </a>
+                        </div>
+                        <a routerLink="/search/dummy">
+                            <a id="search_1"><i class="ti-search"></i></a>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>

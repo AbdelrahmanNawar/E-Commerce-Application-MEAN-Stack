@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg p-3">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="breadcrumb_iner">
+                    <div class="breadcrumb_iner_item">
+                        <p>Home / Category / Add Product</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- breadcrumb start-->
+<!-- add Item -->
+<div class="container m-5 p-1">
+    <form class="add-product" action="">
+        <div class="add-product__images slider">
+            <div class="add-product__image-actions">
+                <div class="add-product__image-action">
+                    <!-- <a><i id="addPrdIcon" class="fas fa-plus-square"></i>
+                        <span id="fileSpanContainer">
+                            <input id="fileUpload" #inputFile type="file" (change)="uploadFile($event)" style="display: none;">
+                        </span>
+                    </a> -->
+                    <a (click)="removeImg()"><i class="fas fa-trash-alt"></i></a>
+                </div>
+            </div>
+            <div class="slider__items">
+                <!-- <div class="slider__item active" style="background-image: url({{newProductObj.image}})"></div> -->
+                <div class="preview text-center">
+                    <img style="width: 400px; height: 400;" [src]="imgPreview" *ngIf="imgPreview">
+                    <img style="width: 400px; height: 400;" src="assets/products/default-product-image.png" *ngIf="!imgPreview">
+                    <div class="form-group text-center m-3">
+                        <span id="fileSpanContainer">
+                            <form method="post" enctype="multipart/form-data">
+                                <input id="fileUpload" name="image" #inputFile type="file" (change)="uploadFile($event)">
+                            </form>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="add-product__data">
+            <div class="form-controls">
+                <div class="form-group">
+                    <label for="">Title</label>
+                    <input class="form-control" type="text" name="title" [(ngModel)]="newProductObj.title" />
+                    <div class="text-danger p-0 col-12" *ngIf="newProductObj.title.length == 0">
+                        Name is required..
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="">Description</label>
+                    <textarea class="form-control" name="details" [(ngModel)]="newProductObj.details" cols="30" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="">Price</label>
+                    <input class="form-control" type="text" name="price" [(ngModel)]="newProductObj.price" id="" />
+                    <div class="text-danger p-0 col-12" *ngIf="newProductObj.price == 0">
+                        Price is required..
+                    </div>
+                </div>
+                <div class="add-product__discount">
+                    <div class="form-group">
+                        <label for="">Satus</label>
+                        <div class="form-group__radios">
+                            <div class="form-group__radio">
+                                <input type="radio" name="sale" value=true [(ngModel)]="newProductObj.isPromoted" />
+                                <span>On Sale</span>
+                            </div>
+                            <div class="form-group__radio">
+                                <input type="radio" name="sale" value=false [(ngModel)]="newProductObj.isPromoted" />
+                                <span>Not On Sale</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="">Promotion</label>
+                        <input class="form-control" type="text" name="promotion" [(ngModel)]="newProductObj.promotion" [disabled]="disabledFlag" />
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="validationMsg!==''">
+                    {{validationMsg}}
+                </div>
+                <div class="form-group">
+                    <label for="">Quantity</label>
+                    <input class="form-control" type="number" name="quantity" [(ngModel)]="newProductObj.quantity">
+                </div>
+                <div class="form-group">
+                    <label>Category</label>
+                    <select class="form-control" name="category" #categorySelected (change)="selectCategory(categorySelected.value)">
+                        <option value="men">Men</option>
+                        <option value="women">Women</option>
+                        <option value="children">Children</option>
+                     </select>
+                    <div class="text-danger p-0  col-12" *ngIf="newProductObj.category == null">
+                        Category is required..
+                    </div>
+                </div>
+                <div class="add-product__actions">
+                    <button class="btn btn--gray" (click)="cancelAddingProduct()" routerLink="/products">Cancel</button>
+                    <a type="button" class="btn btn--primary" (click)="addNewProduct()">Add</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<script>
+    $("#addPrdIcon").click(function() {
+        $("#fileUpload").trigger('click');
+    });
+
+    $('#fileUpload').on('change', function() {
+        var val = $(this).val();
+        $(this).siblings('#fileSpanContainer').text(val);
+    })
+</script>

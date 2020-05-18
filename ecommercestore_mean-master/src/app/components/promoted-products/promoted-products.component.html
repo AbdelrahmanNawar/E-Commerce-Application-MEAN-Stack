@@ -1,0 +1,24 @@
+<div class="item-medium-1__alert" *ngIf="product.promotion">Sale</div>
+<div class="single_category_product">
+    <div class="single_category_img">
+        <a routerLink="/productDetails/{{ product._id }}">
+            <img [src]="product.imageUrl" *ngIf="product.imageUrl" />
+            <img [src]="product.imageUrl" *ngIf="!product.imageUrl" />
+        </a>
+        <div class="category_social_icon">
+            <ul>
+                <li>
+                    <a><i class="ti-bag"></i></a>
+                </li>
+            </ul>
+        </div>
+        <div class="category_product_text">
+            <a routerLink="/productDetails/{{ product._id }}">
+                <h5>{{ product.title }}</h5>
+            </a>
+            <del *ngIf="product.promotion">${{ product.price }}</del>
+            <br *ngIf="!product.promotion">
+            <p>${{ getPrice() }}</p>
+        </div>
+    </div>
+</div>

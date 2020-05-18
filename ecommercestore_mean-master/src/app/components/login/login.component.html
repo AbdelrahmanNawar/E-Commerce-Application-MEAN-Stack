@@ -1,0 +1,134 @@
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.15.1/jquery.validate.min.js"></script>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 mx-auto">
+                <div id="first">
+                    <div class="myform form ">
+                        <div class="logo mb-3">
+                            <div class="col-md-12 text-center">
+                                <h1>Login</h1>
+                            </div>
+                        </div>
+                        <form action="" method="post" (ngSubmit)="Login()">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" [(ngModel)]="loginObject.email">
+                            </div>
+                            <div id="validation" *ngIf="loginObject.email.length < 7">
+                                Enter Valid mail..
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Password</label>
+                                <input type="password" name="password" id="password" class="form-control" aria-describedby="emailHelp" placeholder="Enter Password" [(ngModel)]="loginObject.password">
+                            </div>
+                            <div id="validation" *ngIf="loginObject.password.length < 5">
+                                Enter Valid password..
+                            </div>
+
+                            <div *ngIf="invalidLogin || !loginObject.email || !loginObject.password" class="alert alert-danger">
+                                Invalid username and/or password.
+                            </div>
+
+                            <div class="form-group">
+                                <p class="text-center">By signing up you accept our <a>Terms Of Use</a></p>
+                            </div>
+                            <div class="col-md-12 text-center ">
+                                <button type="submit" class=" btn btn-primary btn-lg btn-block login-button">Login</button>
+                            </div>
+                            <div class="col-md-12 ">
+                                <div class="login-or">
+                                    <hr class="hr-or">
+                                    <span class="span-or">or</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <p class="text-center">Don't have account? <a routerLink="/register" id="signup">Sign up
+                                        here</a></p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $("#signup").click(function() {
+            $("#first").fadeOut("fast", function() {
+                $("#second").fadeIn("fast");
+            });
+        });
+
+        $("#signin").click(function() {
+            $("#second").fadeOut("fast", function() {
+                $("#first").fadeIn("fast");
+            });
+        });
+
+
+
+        $(function() {
+            $("form[name='login']").validate({
+                rules: {
+
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+
+                    }
+                },
+                messages: {
+                    email: "Please enter a valid email address",
+
+                    password: {
+                        required: "Please enter password",
+
+                    }
+
+                },
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+
+
+
+        $(function() {
+
+            $("form[name='registration']").validate({
+                rules: {
+                    firstname: "required",
+                    lastname: "required",
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 5
+                    }
+                },
+
+                messages: {
+                    firstname: "Please enter your firstname",
+                    lastname: "Please enter your lastname",
+                    password: {
+                        required: "Please provide a password",
+                        minlength: "Your password must be at least 5 characters long"
+                    },
+                    email: "Please enter a valid email address"
+                },
+
+                submitHandler: function(form) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+</body>

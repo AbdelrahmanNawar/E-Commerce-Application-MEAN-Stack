@@ -1,0 +1,16 @@
+.item-medium-1__alert {
+    border-radius: 50%;
+    background-color: #0088CC;
+    border-bottom: 2px solid #006699;
+    color: white;
+    width: 4rem;
+    height: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-weight: 700;
+    top: -1rem;
+    right: 0;
+    z-index: 5;
+}

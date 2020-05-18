@@ -1,0 +1,86 @@
+<app-dropdown>
+    <ng-container class="dropDownHeader">
+        <div class="image image--small" style="background-image: url('assets/img/icons/icon-cart-big.svg'); margin: 5px; width: 20px; height: 20px;">
+            <div>
+                <div class="notification notification--danger">
+                    {{ prdService.getShoppingCartContent()?.length }}
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-container class="dropDownBody">
+        <div style="height: 300px; width: 400px; overflow: auto; background-color: white;">
+            <ul class="dropdown__items list list--vr-separator">
+
+                <li *ngFor="let prd of prdService.getShoppingCartContent()" class="dropdown__item list__item">
+                    <div class="item-small-1">
+                        <div class="item-small-1__data" routerLink="/productDetails/{{prd._id}}">
+                            <a class="item-small-1__title">{{ prd.title }}</a>
+                            <span class="item-small-1__description">
+                               {{ prd.count }}X ${{ getFinalPriceForAproduct(prd) }}
+                            </span>
+                        </div>
+                        <div class="item-small-1__image-box">
+                            <img class="item-small-1__image image" [src]="prd.imageUrl" *ngIf="prd.imageUrl" />
+                            <img class="item-small-1__image image" [src]="prd.imageUrl" *ngIf="!prd.imageUrl" />
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="separator"></div>
+        <div class="block">
+            <span class="lable">Total:</span>
+            <span class="lable">${{ prdService.getTotalCostFromLocalStorage() }}</span>
+        </div>
+        <div class="block list list--hr">
+            <a class="list-item btn btn--gray text-light" (click)="resetCart()">Reset</a>
+            <a class="list-item btn btn--primary" routerLink="/checkout">Checkout</a>
+        </div>
+    </ng-container>
+</app-dropdown>
+
+
+<!-- <app-dropdown>
+    <ng-container class="dropDownHeader">
+        <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+            <i class="fa fa-shopping-cart"></i>
+            <span>Your Cart</span>
+            <div class="qty">3</div>
+        </a>
+    </ng-container>
+    <ng-container class="dropDownBody">
+        <div class="cart-list">
+            <div class="product-widget">
+                <div class="product-img">
+                    <img src="./img/product01.png" alt="">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                </div>
+                <button class="delete"><i class="fa fa-close"></i></button>
+            </div>
+
+            <div class="product-widget">
+                <div class="product-img">
+                    <img src="./img/product02.png" alt="">
+                </div>
+                <div class="product-body">
+                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                </div>
+                <button class="delete"><i class="fa fa-close"></i></button>
+            </div>
+        </div>
+        <div class="cart-summary">
+            <small>3 Item(s) selected</small>
+            <h5>SUBTOTAL: $2940.00</h5>
+        </div>
+        <div class="cart-btns">
+            <a href="#">View Cart</a>
+            <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+        </div>
+    </ng-container>
+</app-dropdown> -->

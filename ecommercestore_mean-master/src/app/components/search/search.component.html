@@ -1,0 +1,47 @@
+<div class="search_input" id="search_input_box">
+    <div class="container">
+        <form class="d-flex justify-content-between search-inner">
+            <input type="text" (keydown)="inputValueChanged(searchInput.value)" #searchInput name=" searchInput " class="form-control" placeholder="Search Here " />
+            <button type="submit" class="btn" (keyenter)="inputValueChanged(searchInput.value)"></button>
+        </form>
+    </div>
+</div>
+
+<body class="bg-white">
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <p>Home / Search</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Category Product Area =================-->
+    <section class="cat_product_area section_padding border_top">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="row">
+                        <!-- Products -->
+                        <h3 class="pb-3 mb-4 font-italic border-bottom" *ngIf="productsList">
+                            Result
+                        </h3>
+                        <ng-container class="col-lg-4 col-sm-6" *ngFor="let prd of productsList">
+                            <app-search-item [product]="prd" class="col-sm-12"></app-search-item>
+                        </ng-container>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================End Category Product Area =================-->
+</body>

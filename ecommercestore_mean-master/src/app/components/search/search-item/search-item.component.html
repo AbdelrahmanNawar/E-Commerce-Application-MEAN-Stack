@@ -1,0 +1,34 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-11 m-2">
+            <div class="card flex-md-row mb-4 shadow-sm h-md-250">
+                <div class="card-body d-flex flex-column align-items-start col-sm-7">
+                    <strong class="d-inline-block mb-2 text-primary">{{product.title}}</strong>
+                    <div class="mb-1 text-muted small">Category: {{product.category}}</div>
+                    <p class="card-text mb-auto">In Stock: {{product.quantity}}</p>
+                    <a class="btn btn-outline-primary btn-sm" role="button" routerLink="/productDetails/{{ product._id }}">Continue reading</a>
+                </div>
+                <div class="col-sm-4 m-2">
+                    <img class="card-img-right flex-auto col-sm-12 d-sm-block" alt="Thumbnail [200x250]" [src]="product.imageUrl" style="width: 300px; height: 200px;">
+                </div>
+
+                <span class="text-center col-sm-2" *ngIf="currentUserRole === 'admin'">
+                    <a class="btn_3 btn-secondary m-1" routerLink="/product/edit/{{ product._id }}">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <button type="button" class="btn_3 btn-danger text-light m-1" data-toggle="modal" data-target="#myModal" routerLink="/product/delete/{{ product._id }}">
+                        <i class="fa fa-trash-alt"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+</div>
