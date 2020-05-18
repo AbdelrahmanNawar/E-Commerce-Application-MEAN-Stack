@@ -1,1 +1,1 @@
-# E-Commerce-Application-MEAN-Stack
+An ECommerce application with users to login and purchase products by navigating, searching and adding products to cart, then proceed with checkout. A node API connected to mongoDB with Angular FrontEnd
